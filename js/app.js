@@ -96,6 +96,7 @@ theme();
 
 window.addEventListener("load", () => {
   function animatinOne() {
+    ScrollTrigger.refresh();
     const tl = gsap.timeline();
 
     tl.to(
