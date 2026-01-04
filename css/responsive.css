@@ -1321,3 +1321,20 @@
     display: none;
   }
 }
+
+@media (max-width: 769px) {
+  body {
+    overflow: auto !important; /* Force allow scrolling */
+    height: auto !important;
+  }
+
+  .scrollContainer {
+    overflow: visible !important; /* Let content flow naturally */
+  }
+
+  /* Ensure the hero page doesn't trap the touch event */
+  #home {
+    pointer-events: auto;
+    touch-action: pan-y; /* Explicitly allow vertical panning */
+  }
+}

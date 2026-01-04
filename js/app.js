@@ -6,11 +6,23 @@ const hoverElements = document.querySelectorAll(".hover-element");
 function smoothScroll() {
   gsap.registerPlugin(ScrollTrigger);
 
-  // Using Locomotive Scroll from Locomotive https://github.com/locomotivemtl/locomotive-scroll
+  gsap.registerPlugin(ScrollTrigger);
+
+  // Check if it's a touch device/mobile
+  const isMobile = window.innerWidth <= 768;
+
+  if (isMobile) {
+    // 1. Remove the hidden overflow so native scroll works
+    document.body.style.overflow = "auto";
+    return; // Exit and don't initialize Locomotive on mobile
+  }
 
   const locoScroll = new LocomotiveScroll({
     el: document.querySelector(".scrollContainer"),
     smooth: true,
+    // Add these for better mobile compatibility if you MUST use it
+    tablet: { smooth: true },
+    smartphone: { smooth: true },
   });
   // each time Locomotive Scroll updates, tell ScrollTrigger to update too (sync positioning)
   locoScroll.on("scroll", ScrollTrigger.update);
@@ -163,6 +175,7 @@ window.addEventListener("load", () => {
         ".loader",
         {
           height: 0,
+          display: "none",
           duration: 0.7,
           ease: "Power4.easeOut",
         },
